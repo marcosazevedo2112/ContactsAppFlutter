@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage> {
                       ? "images/contact-icon.png"
                       : _contactsList[index].img),
                   backgroundColor: Colors.transparent,
-
                 ),
               ),
               Column(
@@ -174,11 +173,8 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             FlatButton.icon(
                                 onPressed: () {
-                                  helper.deleteContact(_contactsList[index].id);
-                                  Navigator.pop(
-                                    context,
-                                  );
-                                  getAllContacts();
+                                  Navigator.pop(context);
+                                  reallyDelete(context, index);
                                 },
                                 padding: EdgeInsets.only(left: 50, right: 150),
                                 icon: Icon(Icons.delete),
@@ -215,5 +211,29 @@ class _HomePageState extends State<HomePage> {
         getAllContacts();
       }
     }
+  }
+
+  Widget reallyDelete(context, index) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Tem certeza?"),
+              content:
+                  Text("Voce deseja deletar ${_contactsList[index].name}?"),
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Nao")),
+                FlatButton(
+                    onPressed: () {
+                      helper.deleteContact(_contactsList[index].id);
+                      Navigator.pop(context);
+                      getAllContacts();
+                    },
+                    child: Text("Sim")),
+              ],
+            ));
   }
 }
