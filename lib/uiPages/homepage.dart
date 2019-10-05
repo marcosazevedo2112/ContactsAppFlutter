@@ -213,13 +213,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget reallyDelete(context, index) {
+  void reallyDelete(context, index) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Tem certeza?"),
               content:
-                  Text("Voce deseja deletar ${_contactsList[index].name}?"),
+                  Text("Voce deseja deletar o contato ${_contactsList[index].name}?"),
               actions: <Widget>[
                 FlatButton(
                     onPressed: () {
